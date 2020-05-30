@@ -1,0 +1,19 @@
+[ng-cloak] {
+    display: none !important;
+}
+
+.userImage {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+.row {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.details>div {
+    text-align: center;
+}

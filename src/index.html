@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Users Chart</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script data-main="js/" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+      <script>require(['js/main.js'])</script>
+   </head>
+   <body ng-controller="userDetailsAppController" ng-cloak>
+      <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">
+         <form class="navbar-form col-lg-5 col-md-5 col-sm-5 col-xs-5" role="search">
+            <div class="input-group add-on">
+               <input class="form-control" placeholder="Search Users..." name="searchTerm" id="searchTerm" ng-model="searchTerm" type="text">
+               <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit" ng-click="searchUser()">
+                  <i class="glyphicon glyphicon-search"></i>
+                  </button>
+               </div>
+            </div>
+         </form>
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row" ng-repeat="user in users">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+               <img ng-src="{{user.avatar_url}}" class="userImage" ng-click="getDetails(user)" data-toggle="modal" data-target="#userDetails">
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 userInfo">
+               <div class="details">
+                  <div ng-if="user.site_admin === true">
+                     Site Admin
+                  </div>
+                  <div ng-if="user.type === 'User'">
+                     <span class="glyphicon glyphicon-user"></span>
+                  </div>
+                  <div ng-if="user.type === 'Organization'">
+                     <span class="fa fa-building"></span>
+                  </div>
+                  <div>
+                     {{user.login}}
+                  </div>
+                  <div>
+                     ID:{{user.id}}
+                  </div>
+                  <div>
+                     <button type="button" class="btn btn-primary btn-md" ng-click="openGitLink(user)" title="Open GitHub Link">
+                     <span class="fa fa-github"> Open Git Link</span>
+                     </button>
+                  </div>
+               </div>
+            </div>
+            <div class="modal fade" id="userDetails">
+               <div class="modal-dialog modal-md">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        USER DETAILS
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     </div>
+                     <div class="modal-body">
+                        <div>
+                           <strong>{{selectedUser.name}}</strong>
+                        </div>
+                        <div>
+                           Blog:
+                           <a href="{{selectedUser.blog}}" target="_blank">{{selectedUser.blog}}</a>
+                        </div>
+                        <div>
+                           Location:{{selectedUser.location}}
+                        </div>
+                        <div>
+                           Followers:{{selectedUser.followers}}
+                        </div>
+                        <div>
+                           Followers URL:
+                           <a href="{{selectedUser.followers_url}}" target="_blank">{{selectedUser.followers_url}}</a>
+                        </div>
+                        <div>
+                           Subscriptions:
+                           <a href="{{selectedUser.subscriptions_url}}" target="_blank">{{selectedUser.subscriptions_url}}</a>
+                        </div>
+                        <div>
+                           Organisations:
+                           <a href="{{selectedUser.organizations_url}}" target="_blank">{{selectedUser.organizations_url}}</a>
+                        </div>
+                        <div>
+                           Repositories URL:
+                           <a href="{{selectedUser.repos_url}}" target="_blank">{{selectedUser.repos_url}}</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>
